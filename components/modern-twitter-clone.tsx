@@ -26,7 +26,7 @@ export function ModernTwitterClone() {
 	const handlePostTweet = async () => {
 		if (newTweet.trim() !== "") {
 			const tweet = {
-				id: `${username}-${tweets.length + 1}`,
+				id: tweets.length + 1, // 修正: idをnumber型に変更
 				content: newTweet,
 				likes: 0,
 				comments: 0,
@@ -37,29 +37,35 @@ export function ModernTwitterClone() {
 			setTweets([tweet, ...tweets]);
 			setNewTweet("");
 
+			const basicInstructions =
+				"あなたは140字以内のTwitterのツイートをしてください。絶対に敬語ではなくタメ口で話し、基本態度が悪い状態で返信してください。また、あなたの性格は以下の通りです。";
 			const users = [
 				{
 					name: "wasabijiro",
 					personality:
-						"cryptoのとても強いエンジニア。たまに技術的なアドバイスをくれる。ツイートに対しては冷静に、一言呟くのみ。例:すごいじゃん。",
+						basicInstructions +
+						"cryptoのとても強いエンジニア。たまに技術的なアドバイスをくれる。ツイートに対しては実際に動いているクリプトのプロジェクトを引用しながら、反応してくれる。",
 					avatar: "/wasabijiro.png",
 				},
 				{
 					name: "uoooo",
 					personality:
-						"ツイッターの達人。いつも面白いツイートをしている。経済学に関する観点から、経済学の専門的な知識を引用してツイート反応してくれる。「つまり結論は飲み会ってことか」が口癖。例:笑った。",
+						basicInstructions +
+						"ツイッターの達人。いつも面白いツイートをしている。経済学に関する観点から、必ず経済学の専門的な知識を引用してツイート反応してくれる。「つまり結論は飲み会ってことか」が口癖。例:笑った。",
 					avatar: "/uoooo.png",
 				},
 				{
 					name: "konaito",
 					personality:
-						"アプリエンジニア。いつも新しいアプリを作っている。ツイートに対しては、アプリのアイディアを提案してくれる。優しい。例:これアプリ化したら面白いんじゃない？",
+						basicInstructions +
+						"アプリエンジニア。toCに対する深い洞察を持っており、いつも新しいアプリを作っている。ツイートに対しては、必ず市場に対する深い洞察を引用しながら、新しいアプリのアイディアを提案してくれる。優しい。例:これアプリ化したら面白いんじゃない？",
 					avatar: "/konaito.png",
 				},
 				{
 					name: "fuyutarow",
 					personality:
-						"エンジニアの専門家。とても高い技術力と、市場に対する洞察力を保持している。また、エンジニアリングに強いこだわりがあり、アカデミックな知識を重視する。とても辛辣な反応をするが、的を得たツイートをすると正しく評価してくれる。",
+						basicInstructions +
+						"エンジニアの専門家。とても高い技術力と、市場に対する洞察力を保持している。また、エンジニアリングに強いこだわりがあり、アカデミックな知識を重視する。たまに叱責したり、とても辛辣な反応をするが、必ず技術的な引用をして的を得たツイートをすると正しく評価してくれる。",
 					avatar: "/fuyutarow.png",
 				},
 			];
@@ -79,7 +85,7 @@ export function ModernTwitterClone() {
 				const data = await response.json();
 				const reply = data.message.content;
 				const replyTweet = {
-					id: `${user.name}-${tweets.length + 1}`,
+					id: tweets.length + 1, // 修正: idをnumber型に変更
 					content: `${reply}`,
 					likes: 0,
 					comments: 0,
